@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #loader {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <input id="search" type="text" />
+    <button onclick="getData()">Buscar</button>
+    <img id="loader" width="30" src="../front/assets/load.gif">
+    <p id="content"></p>
+    <script>
+        let loader = document.getElementById('loader').style.display;
+        let getData = () => {
+            let filter = document.getElementById('search').value
+            document.getElementById('loader').style.display = 'block'
+            fetch(`http://127.0.0.1:3333/api/searchProducts?filter=${filter}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('content').innerHTML= JSON.stringify(data)
+                    document.getElementById('loader').style.display = 'none'
+                }
+                );
+        }
+
+        let showLoader = () => {
+
+        }
+
+    </script>
+</body>
+
+</html>
